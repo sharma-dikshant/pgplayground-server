@@ -1,0 +1,25 @@
+services:
+  server:
+    build: .
+    container_name: pgplayground-server
+    env_file: 
+      - .env
+    ports:
+      - 3001:3000
+    depends_on:
+      - db 
+    volumes:
+      - .:/server
+    command: ["npm", "run", "start:dev"]
+    restart: unless-stopped
+  db:
+    image: postgres:15-alpine
+    container_name: pgplayground-db 
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres 
+      POSTGRES_DB: postgres 
+    volumes:
+      - pgplayground_db:/var/lib/postgresql/data
+volumes:
+  pgplayground_db:
