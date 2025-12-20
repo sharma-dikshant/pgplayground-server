@@ -2,11 +2,11 @@ import { Controller, Get, Post, Body, Param, Headers, HttpCode } from '@nestjs/c
 import { UsersService } from './users.service';
 import { CreateUserTableDto } from './dto/create-user-table.dto';
 
-@Controller('users')
+@Controller('')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get('/id')
+  @Get('users/id')
   generateId() {
     return this.usersService.generateId();
   }
@@ -21,7 +21,7 @@ export class UsersController {
     return this.usersService.describe(tableName);
   }
 
-  @Post('/query')
+  @Post('tables/query')
   @HttpCode(200)
   executeQuery(@Headers('X-Session') userId: string, @Param('id') id: string, @Body() body: { query: string }) {
     const { query } = body;
@@ -35,7 +35,7 @@ export class UsersController {
     return this.usersService.seedData(userId, tableName, rows);
   }
 
-  @Get('/tables')
+  @Get('users/tables')
   findAll(@Headers('X-Session') userId: string) {
     return this.usersService.findAll(userId);
   }
