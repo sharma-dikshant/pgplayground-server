@@ -10,6 +10,7 @@ services:
       - db 
     volumes:
       - .:/server
+      - /server/node_modules
     command: ["npm", "run", "start:dev"]
     restart: unless-stopped
   db:
