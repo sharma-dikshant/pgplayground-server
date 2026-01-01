@@ -74,4 +74,9 @@ export class UserSchemaService {
     const res = await this.userSchemaRepo.findOne({ where: { userId } });
     return res;
   }
+
+  async delete(id: string) {
+    await this.userSchemaRepo.softDelete({ id });
+    return null;
+  }
 }
